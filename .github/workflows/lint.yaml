@@ -1,0 +1,33 @@
+name: Python Lint/Check
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - "**.py"
+  pull_request:
+    branches: ["master"]
+    paths:
+      - "**.py"
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+   
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      
+      - name: Sync Packages
+        run: uv sync --dev
+
+      - name: Run ruff check
+        run: uv run ruff check
+
+      - name: Run ty check
+        run: uv run ty check
