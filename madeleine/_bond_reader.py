@@ -164,7 +164,7 @@ def _read_value(id: int, type: BondType, data: BufferedReader) -> BondValue:
         case BondType.Uint8:
             val.value = data.read(1)[0]
         case BondType.Int8:
-            val.value = cast(int, struct.unpack("b", data.read(1))[0])
+            val.value = struct.unpack("b", data.read(1))[0]
         case BondType.Bool:
             val.value = bool(data.read(1)[0])
         case BondType.Float:
