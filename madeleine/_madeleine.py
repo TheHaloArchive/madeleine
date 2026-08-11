@@ -11,28 +11,16 @@ class BondValue:
     "The unique identifier of the BondValue inside its struct."
     type: BondType = BondType.Unavailable
     "The type of the BondValue."
-    value: (
-        int
-        | str
-        | float
-        | bool
-        | list["BondValue"]
-        | dict["BondValue", "BondValue"]
-        | None
-    ) = None
+    value: int | str | float | bool | list["BondValue"] | dict["BondValue", "BondValue"] | None = (
+        None
+    )
     "The prased value of the BondValue."
 
     def __init__(
         self,
         id: int,
         type: BondType,
-        value: int
-        | str
-        | float
-        | bool
-        | list["BondValue"]
-        | dict["BondValue", "BondValue"]
-        | None,
+        value: int | str | float | bool | list["BondValue"] | dict["BondValue", "BondValue"] | None,
     ) -> None:
         self.id = id
         self.type = type
@@ -46,11 +34,7 @@ class BondValue:
         Returns:
             - A list of elements contained within the BondValue.
         """
-        if (
-            self.type == BondType.List
-            or self.type == BondType.Set
-            or self.type == BondType.Struct
-        ):
+        if self.type == BondType.List or self.type == BondType.Set or self.type == BondType.Struct:
             if type(self.value) is list:
                 return self.value
         return []
